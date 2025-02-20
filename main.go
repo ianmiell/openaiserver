@@ -63,7 +63,8 @@ func loadModel(modelName string) error {
 
 // Generate text using Hugging Face model (calls `llama.cpp` or a similar tool)
 func generateText(prompt string, modelName string) (string, error) {
-	cmd := exec.Command("llama-cli", "-m", "./models/"+modelName+"/mistral-7b-v0.1.Q2_K.gguf", "-p", prompt, "--temp", "0.7", "-n", "256")
+	//cmd := exec.Command("llama-cli", "-m", "./models/"+modelName+"/mistral-7b-v0.1.Q2_K.gguf", "-p", prompt, "--temp", "0.7", "-n", "256")
+	cmd := exec.Command("llama-cli", "-m", "./models/"+modelName+"/tiny-vicuna-1b.q2_k.gguf", "-p", prompt, "--temp", "0.7", "-n", "256")
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println("Error generating text:", string(output))
@@ -110,7 +111,8 @@ func main() {
 
 	// Load model before starting API
 	//modelName := "mistralai/Mistral-7B-Instruct-v0.1"
-	modelName := "TheBloke/Mistral-7B-v0.1-GGUF"
+	//modelName := "TheBloke/Mistral-7B-v0.1-GGUF"
+	modelName := "afrideva/Tiny-Vicuna-1B-GGUF"
 	//modelName := "SakanaAI/Llama-3-8B-Instruct-Coding-Expert"
 	err := loadModel(modelName)
 	if err != nil {
